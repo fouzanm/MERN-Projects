@@ -163,11 +163,9 @@ export const Chats = () => {
           <Divider />
         </Stack>
         <Stack
-          direction={"column"}
           flexGrow={1}
-          overflow="scroll"
+          sx={{overflowY :"scroll"}}
           height="100%"
-          spacing={2}
         >
           <SimpleBarStyle timeout={500} clickOnTrack={false}>
             <Stack spacing={2}>
