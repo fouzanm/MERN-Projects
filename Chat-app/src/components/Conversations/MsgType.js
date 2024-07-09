@@ -3,12 +3,54 @@ import {
   Divider,
   IconButton,
   Link,
+  Menu,
+  MenuItem,
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import { DownloadSimple, Image } from "phosphor-react";
+import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
+import { Message_options } from "../../data";
+
+export const MessageOptions = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    
+    setAnchorEl(event.currentTarget);
+    console.log('event', event.currentTarget, anchorEl,  open)
+  };
+  const handleClose = () => {
+    console.log('handleClose')
+    setAnchorEl(null);
+  };
+  return (
+    <>
+      <DotsThreeVertical 
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        size={20} />
+      <Menu id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}>
+        <Stack spacing={1} px={1}>
+          {Message_options.map((el) => 
+            <MenuItem onClick={handleClose}>{el.title}</MenuItem>
+          )}
+        </Stack>
+      </Menu>
+    </>
+  )
+}
+
 
 export const DocMsg = ({ el }) => {
   const theme = useTheme();
@@ -49,6 +91,7 @@ export const DocMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
+      <MessageOptions/>
     </Stack>
   );
 };
@@ -101,6 +144,7 @@ export const LinkMsg = ({ el }) => {
           </Stack>
         </Stack>
       </Box>
+      <MessageOptions/>
     </Stack>
   );
 };
@@ -142,6 +186,7 @@ export const ReplyMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
+      <MessageOptions/>
     </Stack>
   );
 };
@@ -174,6 +219,7 @@ export const MediaMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
+      <MessageOptions/>
     </Stack>
   );
 };
@@ -199,6 +245,7 @@ export const TextMsg = ({ el }) => {
           {el.message}
         </Typography>
       </Box>
+      <MessageOptions/>
     </Stack>
   );
 };

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { Chats } from "./Chats";
 import { Box, Stack } from "@mui/material";
 import { Conversations } from "../../components/Conversations";
