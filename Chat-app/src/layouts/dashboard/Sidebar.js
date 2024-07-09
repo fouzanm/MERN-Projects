@@ -4,11 +4,13 @@ import {
   Box,
   Divider,
   IconButton,
+  Menu,
+  MenuItem,
   Stack,
   useTheme,
 } from "@mui/material";
 import Logo from "../../assets/Images/logo.ico";
-import { Nav_Buttons } from "../../data";
+import { Nav_Buttons, Profile_Menu } from "../../data";
 import { Gear } from "phosphor-react";
 import { faker } from "@faker-js/faker";
 import useSettings from "../../hooks/useSettings";
@@ -18,6 +20,14 @@ export const Sidebar = () => {
   const theme = useTheme();
   const [selected, setSelected] = useState(0);
   const { onToggleMode } = useSettings();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Box
       p={2}
@@ -111,7 +121,42 @@ export const Sidebar = () => {
         </Stack>
         <Stack spacing={4}>
           <AntSwitch defaultChecked onClick={() => onToggleMode()} />
-          <Avatar src={faker.image.avatar()} />
+          <Avatar src={faker.image.avatar()}
+            id="basic-button"
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}/>
+          <Menu id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right'
+            }}
+            transformOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left'
+            }}>
+            <Stack spacing={1} px={1}>
+              {Profile_Menu.map((el) => 
+                <MenuItem onClick={handleClose}>
+                  <Stack
+                    width={100} 
+                    direction={'row'} 
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                    >
+                      <span>{el.title}</span>{el.icon}
+                  </Stack>
+                </MenuItem>
+              )}
+            </Stack>
+          </Menu>
         </Stack>
       </Stack>
     </Box>

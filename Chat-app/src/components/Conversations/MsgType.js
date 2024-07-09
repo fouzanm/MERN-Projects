@@ -17,12 +17,9 @@ export const MessageOptions = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    
     setAnchorEl(event.currentTarget);
-    console.log('event', event.currentTarget, anchorEl,  open)
   };
   const handleClose = () => {
-    console.log('handleClose')
     setAnchorEl(null);
   };
   return (
