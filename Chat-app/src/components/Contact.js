@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Divider, IconButton, Stack, Typography, useTheme } from '@mui/material'
-import { Bell, CaretRight, Phone, Star, VideoCamera, X } from 'phosphor-react';
+import { Bell, CaretRight, Phone, Prohibit, Star, Trash, VideoCamera, X } from 'phosphor-react';
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { ToggleSidebar } from '../redux/slices/app';
@@ -96,12 +96,16 @@ const Contact = () => {
           </Stack>
           <Divider/>
           <Typography>1 group in common</Typography>
-          <Stack>
+          <Stack direction={'row'} spacing={2} alignItems={'center'}>
             <Avatar src={faker.image.avatar()} alt={faker.name.fullName()}/>
             <Stack spacing={0.5}>
               <Typography variant='subtitle2'>Frends Forever</Typography>
               <Typography variant='caption'>Owl, Parrot, Rabbit, You</Typography>
             </Stack>
+          </Stack>
+          <Stack direction={'row'} spacing={2} alignItems={'center'}>
+            <Button fullWidth variant='outlined' startIcon={<Prohibit/>}>Block</Button>
+            <Button fullWidth variant='outlined' startIcon={<Trash/>}>Delete</Button>
           </Stack>
         </Stack>
       </Stack>
