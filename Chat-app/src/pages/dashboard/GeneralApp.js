@@ -6,6 +6,7 @@ import { useTheme } from "@emotion/react";
 import Contact from "../../components/Contact";
 import { useSelector } from "react-redux";
 import SharedMessages from "../../components/SharedMessages";
+import StarredMessages from "../../components/StarredMessages";
 
 const GeneralApp = () => {
   const theme = useTheme();
@@ -34,7 +35,7 @@ const GeneralApp = () => {
           case 'SHARED':
             return <SharedMessages />
           case 'STARRED':
-            break
+            return <StarredMessages />
           default:
             break;
         }

@@ -9,7 +9,7 @@ export const Conversations = () => {
     <Stack height={"100%"} maxHeight={"100vh"} width={"auto"}>
       <Header />
       <Box sx={{ flexGrow: 1, width: "100%", height: '100%', overflowY: 'scroll' }}>
-        <Message />
+        <Message menu={true}/>
       </Box>
       <Footer />
     </Stack>

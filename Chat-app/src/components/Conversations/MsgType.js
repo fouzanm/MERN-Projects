@@ -24,32 +24,34 @@ export const MessageOptions = () => {
   };
   return (
     <>
-      <DotsThreeVertical 
+      <DotsThreeVertical
         id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
+        aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
+        aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        size={20} />
-      <Menu id="basic-menu"
+        size={20}
+      />
+      <Menu
+        id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}>
+          "aria-labelledby": "basic-button",
+        }}
+      >
         <Stack spacing={1} px={1}>
-          {Message_options.map((el) => 
+          {Message_options.map((el) => (
             <MenuItem onClick={handleClose}>{el.title}</MenuItem>
-          )}
+          ))}
         </Stack>
       </Menu>
     </>
-  )
-}
+  );
+};
 
-
-export const DocMsg = ({ el }) => {
+export const DocMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
@@ -88,12 +90,12 @@ export const DocMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
-      <MessageOptions/>
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-export const LinkMsg = ({ el }) => {
+export const LinkMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
@@ -141,12 +143,12 @@ export const LinkMsg = ({ el }) => {
           </Stack>
         </Stack>
       </Box>
-      <MessageOptions/>
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-export const ReplyMsg = ({ el }) => {
+export const ReplyMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
@@ -183,12 +185,12 @@ export const ReplyMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
-      <MessageOptions/>
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-export const MediaMsg = ({ el }) => {
+export const MediaMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
@@ -216,12 +218,12 @@ export const MediaMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
-      <MessageOptions/>
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-export const TextMsg = ({ el }) => {
+export const TextMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
@@ -242,7 +244,7 @@ export const TextMsg = ({ el }) => {
           {el.message}
         </Typography>
       </Box>
-      <MessageOptions/>
+      {menu && <MessageOptions />}
     </Stack>
   );
 };

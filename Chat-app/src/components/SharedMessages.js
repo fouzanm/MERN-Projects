@@ -70,7 +70,7 @@ function SharedMessages() {
             overflowY: "scroll",
           }}
           p={3}
-          spacing={value == 0 ? 3: 1}
+          spacing={value == 0 ? 3 : 1}
         >
           {(() => {
             switch (value) {
