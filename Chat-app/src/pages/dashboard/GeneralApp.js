@@ -31,7 +31,7 @@ const GeneralApp = () => {
           case 'CONTACT':
             console.log('HERE')
             return <Contact />;
-          case 'STARRED':
+          case 'SHARED':
             return <SharedMessages />
           case 'STARRED':
             break
