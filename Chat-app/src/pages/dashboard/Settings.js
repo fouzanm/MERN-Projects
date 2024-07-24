@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Avatar,
   Box,
+  Divider,
   IconButton,
   Stack,
   Typography,
@@ -122,6 +123,18 @@ const Settings = () => {
               <Typography variant="article">{faker.name.fullName()}</Typography>
               <Typography variant="body2">{faker.random.words()}</Typography>
             </Stack>
+          </Stack>
+          <Stack spacing={4}>
+            {list.map(({ key, icon, title, onclick }) => (
+              <>
+                <Stack spacing={2} sx={{ cursor: "pointer" }} onClick={onclick}>
+                  <Stack direction={"row"} spacing={2} alignItems={"center"}>
+                    {icon} <Typography variant="body2">{title}</Typography>
+                  </Stack>
+                </Stack>
+                {key !== 7 && <Divider/>}
+              </>
+            ))}
           </Stack>
         </Stack>
       </Box>
