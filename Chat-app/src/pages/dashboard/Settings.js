@@ -148,7 +148,9 @@ const Settings = () => {
         </Box>
         {/* Right Panel */}
       </Stack>
-      <Shortcuts open={true} handleClose={() => {}}/>
+      {openShortcuts && (
+        <Shortcuts open={openShortcuts} handleClose={handleCloseShortcuts} />
+      )}
     </>
   );
 };
