@@ -4,10 +4,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import FormProvider from "../../components/hook-form/FormProvider";
 import { Stack } from "@mui/system";
-import { Alert, IconButton, InputAdornment } from "@mui/material";
+import { Alert, Button, IconButton, InputAdornment, Link } from "@mui/material";
 import { RHFTextField } from "../../components/hook-form";
 import { Eye, EyeSlash } from "phosphor-react";
-// import { RHFTextField } from "../../components/hook-form";
+import { Link as RouterLink } from "react-router-dom";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,7 +25,7 @@ const LoginForm = () => {
   };
 
   const methods = useForm({
-    resolver: yupResolver(LoginForm),
+    resolver: yupResolver(LoginSchema),
     defaultValues,
   });
 
@@ -70,6 +70,35 @@ const LoginForm = () => {
           }}
         />
       </Stack>
+      <Stack alignItems="flex-end" sx={{ my: 2 }}>
+        <Link
+          component={RouterLink}
+          variant="body2"
+          color="inherit"
+          underline="always"
+        >
+          Forgot password?
+        </Link>
+      </Stack>
+      <Button
+        fullWidth
+        color="inherit"
+        size="large"
+        type="submit"
+        variant="contained"
+        sx={{
+          bgcolor: "text.primary",
+          color: (theme) =>
+            theme.palette.mode === "light" ? "common.white" : "grey.800",
+            "&:hover": {
+            bgcolor: "text.primary",
+            color: (theme) =>
+              theme.palette.mode === "light" ? "common.white" : "grey.800",
+          },
+        }}
+      >
+        Login
+      </Button>
     </FormProvider>
   );
 };
