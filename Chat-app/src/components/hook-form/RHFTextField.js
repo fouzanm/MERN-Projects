@@ -7,7 +7,7 @@ RHFTextField.prototype = {
   helperText: PropTypes.node,
 };
 
-const RHFTextField = ({ name, helperText, ...other }) => {
+export default function RHFTextField({ name, helperText, ...other }) {
   const { control } = useFormContext();
   return (
     <Controller
@@ -31,4 +31,4 @@ const RHFTextField = ({ name, helperText, ...other }) => {
   );
 };
 
-export default RHFTextField;
+// export default RHFTextField;
