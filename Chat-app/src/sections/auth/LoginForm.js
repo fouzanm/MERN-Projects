@@ -4,8 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import FormProvider from "../../components/hook-form/FormProvider";
 import { Stack } from "@mui/system";
-import { Alert } from "@mui/material";
+import { Alert, IconButton, InputAdornment } from "@mui/material";
 import { RHFTextField } from "../../components/hook-form";
+import { Eye, EyeSlash } from "phosphor-react";
 // import { RHFTextField } from "../../components/hook-form";
 
 const LoginForm = () => {
@@ -53,8 +54,22 @@ const LoginForm = () => {
         {!!errors.afterSubmit && (
           <Alert severity="error">{errors.afterSubmit.message}</Alert>
         )}
+        <RHFTextField name="email" label="Email Address" />
+        <RHFTextField
+          name="password"
+          label="Password"
+          type={showPassword ? "text" : "password"}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment>
+                <IconButton onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <Eye /> : <EyeSlash />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
       </Stack>
-      <RHFTextField name="email" label="Email Address" />
     </FormProvider>
   );
 };
