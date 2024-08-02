@@ -1,13 +1,13 @@
-import React from 'react'
-import { Link, Stack, Typography } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
-import AuthSocial from '../../sections/auth/AuthSocial'
-import LoginForm from '../../sections/auth/LoginForm'
+import React from "react";
+import { Link, Stack, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import AuthSocial from "../../sections/auth/AuthSocial";
+import LoginForm from "../../sections/auth/LoginForm";
 
 const Login = () => {
   return (
     <>
-        <Stack spacing={2} sx={{ mb: 5, position: "relative" }}>
+      <Stack spacing={2} sx={{ mb: 5, position: "relative" }}>
         <Typography variant="h4">Login to Tawk</Typography>
 
         <Stack direction="row" spacing={0.5}>
@@ -22,10 +22,10 @@ const Login = () => {
           </Link>
         </Stack>
         <LoginForm />
-        <AuthSocial/>
+        <AuthSocial />
       </Stack>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
