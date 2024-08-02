@@ -10,7 +10,7 @@ import StarredMessages from "../../components/StarredMessages";
 
 const GeneralApp = () => {
   const theme = useTheme();
-  const {sidebar} = useSelector((store) => store.app)
+  const { sidebar } = useSelector((store) => store.app);
   return (
     <Stack direction={"row"} sx={{ width: "100%" }}>
       <Chats />
@@ -26,20 +26,20 @@ const GeneralApp = () => {
       >
         <Conversations />
       </Box>
-      {console.log(sidebar.type)}
-      {sidebar.open && (() => {
-        switch (sidebar.type) {
-          case 'CONTACT':
-            console.log('HERE')
-            return <Contact />;
-          case 'SHARED':
-            return <SharedMessages />
-          case 'STARRED':
-            return <StarredMessages />
-          default:
-            break;
-        }
-      })()}
+      {sidebar.open &&
+        (() => {
+          switch (sidebar.type) {
+            case "CONTACT":
+              console.log("HERE");
+              return <Contact />;
+            case "SHARED":
+              return <SharedMessages />;
+            case "STARRED":
+              return <StarredMessages />;
+            default:
+              break;
+          }
+        })()}
     </Stack>
   );
 };
