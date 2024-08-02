@@ -1,37 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 import FormProvider from "../../components/hook-form/FormProvider";
-import {
-  Alert,
-  Button,
-  IconButton,
-  InputAdornment,
-  Stack,
-} from "@mui/material";
+import { Stack } from "@mui/system";
+import { Alert, Button } from "@mui/material";
 import { RHFTextField } from "../../components/hook-form";
-import { Eye, EyeSlash } from "phosphor-react";
 
-const RegisterForm = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const RegisterSchema = Yup.object().shape({
+const ResetPasswordForm = () => {
+  const ResetPasswordSchema = Yup.object().shape({
     email: Yup.string()
       .required("Email is Required")
       .email("Email must be a valid email address"),
-    password: Yup.string().required("Password is required"),
   });
 
   const defaultValues = {
-    firstName: "",
-    lastName: "",
     email: "demo@tawk.com",
-    password: "demo1234",
   };
 
   const methods = useForm({
-    resolver: yupResolver(RegisterSchema),
+    resolver: yupResolver(ResetPasswordSchema),
     defaultValues,
   });
 
@@ -53,31 +41,14 @@ const RegisterForm = () => {
       });
     }
   };
+
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
         {!!errors.afterSubmit && (
           <Alert severity="error">{errors.afterSubmit.message}</Alert>
         )}
-        <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
-          <RHFTextField name="firstName" label="First Name" />
-          <RHFTextField name="lastName" label="Last Name" />
-        </Stack>
         <RHFTextField name="email" label="Email Address" />
-        <RHFTextField
-          name="password"
-          label="Password"
-          type={showPassword ? "text" : "password"}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment>
-                <IconButton onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? <Eye /> : <EyeSlash />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
         <Button
           fullWidth
           color="inherit"
@@ -95,11 +66,11 @@ const RegisterForm = () => {
             },
           }}
         >
-          Create Account
+          Send Request
         </Button>
       </Stack>
     </FormProvider>
   );
 };
 
-export default RegisterForm;
+export default ResetPasswordForm;
