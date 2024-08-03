@@ -100,14 +100,7 @@ const CreateGroup = ({ open, handleClose }) => {
       <DialogTitle sx={{mb: 3}}>Create New Group</DialogTitle>
       <DialogContent>
         <CreateGroupForm handleClose={handleClose} />
-        {/* <DialogContentText id="alert-dialog-slide-description">
-          Are you sure you want to block this Contact?
-        </DialogContentText> */}
       </DialogContent>
-      {/* <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>Confirm</Button>
-      </DialogActions> */}
     </Dialog>
   );
 };
