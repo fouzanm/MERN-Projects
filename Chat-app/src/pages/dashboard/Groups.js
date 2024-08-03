@@ -17,6 +17,7 @@ import { MagnifyingGlass, Plus } from "phosphor-react";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import { ChatList } from "../../data";
 import ChatElement from "../../components/ChatElement";
+import CreateGroup from "../../sections/main/CreateGroup";
 
 const Group = () => {
   const theme = useTheme();
@@ -98,6 +99,7 @@ const Group = () => {
           </Stack>
         </Box>
       </Stack>
+      {openDialog && <CreateGroup open={openDialog} handleClose={handleCloseDialog} />}
     </>
   );
 };
