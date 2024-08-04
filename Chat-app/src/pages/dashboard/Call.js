@@ -17,6 +17,7 @@ import { MagnifyingGlass, Plus } from "phosphor-react";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import { CallLogElement } from "../../components/CallElement";
 import { CallLogs } from "../../data";
+import StartCall from "../../sections/main/StartCall";
 
 const Call = () => {
   const theme = useTheme();
@@ -89,6 +90,7 @@ const Call = () => {
           </Stack>
         </Box>
       </Stack>
+      {openDialog && <StartCall open={openDialog} handleClose={handleCloseDialog} />}
     </>
   );
 };
