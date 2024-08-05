@@ -3,6 +3,7 @@ import {
   Avatar,
   Box,
   Divider,
+  Fade,
   IconButton,
   Menu,
   MenuItem,
@@ -15,19 +16,54 @@ import { Gear } from "phosphor-react";
 import { faker } from "@faker-js/faker";
 import useSettings from "../../hooks/useSettings";
 import AntSwitch from "../../components/AntSwitch";
+import { useNavigate } from "react-router-dom";
+
+const getPath = (index) => {
+  switch (index) {
+    case 0:
+      return "/app";
+    case 1:
+      return "/group";
+    case 2:
+      return "/call";
+    case 3:
+      return "/settings";
+
+    default:
+      break;
+  }
+};
+
+const getMenuPath = (index) => {
+  switch (index) {
+    case 0:
+      return "/profile";
+    case 1:
+      return "/settings";
+    case 2:
+      // TODO update token and set authenticate to false
+      return "/auth/login";
+
+    default:
+      break;
+  }
+};
 
 export const Sidebar = () => {
   const theme = useTheme();
-  const [selected, setSelected] = useState(0);
+  const navigate = useNavigate();
   const { onToggleMode } = useSettings();
+  const [selected, setSelected] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const openMenu = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
   return (
     <Box
       p={2}
@@ -85,7 +121,10 @@ export const Sidebar = () => {
                         ? "#000"
                         : theme.palette.text.primary,
                   }}
-                  onClick={() => setSelected(el.index)}
+                  onClick={() => {
+                    setSelected(el.index);
+                    navigate(getPath(el.index));
+                  }}
                 >
                   {el.icon}
                 </IconButton>
@@ -112,7 +151,10 @@ export const Sidebar = () => {
                       ? "#000"
                       : theme.palette.text.primary,
                 }}
-                onClick={() => setSelected(3)}
+                onClick={() => {
+                  setSelected(3);
+                  navigate(getPath(3));
+                }}
               >
                 <Gear />
               </IconButton>
@@ -121,41 +163,52 @@ export const Sidebar = () => {
         </Stack>
         <Stack spacing={4}>
           <AntSwitch defaultChecked onClick={() => onToggleMode()} />
-          <Avatar src={faker.image.avatar()}
-            id="basic-button"
-            aria-controls={open ? 'basic-menu' : undefined}
+          <Avatar
+            id="profile-positioned-button"
+            aria-controls={openMenu ? "profile-positioned-menu" : undefined}
             aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}/>
-          <Menu id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
+            aria-expanded={openMenu ? "true" : undefined}
+            alt={faker.name.fullName()}
+            src={faker.image.avatar()}
+            onClick={handleClick}
+          />
+          <Menu
             MenuListProps={{
-              'aria-labelledby': 'basic-button',
+              "aria-labelledby": "fade-button",
             }}
+            TransitionComponent={Fade}
+            id="profile-positioned-menu"
+            aria-labelledby="profile-positioned-button"
+            anchorEl={anchorEl}
+            open={openMenu}
+            onClose={handleClose}
             anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right'
+              vertical: "bottom",
+              horizontal: "right",
             }}
             transformOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left'
-            }}>
-            <Stack spacing={1} px={1}>
-              {Profile_Menu.map((el) => 
-                <MenuItem onClick={handleClose}>
-                  <Stack
-                    width={100} 
-                    direction={'row'} 
-                    alignItems={"center"}
-                    justifyContent={"space-between"}
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+          >
+            <Box p={1}>
+              <Stack spacing={1}>
+                {Profile_Menu.map((el, index) => (
+                  <MenuItem onClick={handleClose}>
+                    <Stack
+                      onClick={() => navigate(getMenuPath(index))}
+                      sx={{ width: 100 }}
+                      direction={"row"}
+                      alignItems={"center"}
+                      justifyContent={"space-between"}
                     >
-                      <span>{el.title}</span>{el.icon}
-                  </Stack>
-                </MenuItem>
-              )}
-            </Stack>
+                      <span>{el.title}</span>
+                      {el.icon}
+                    </Stack>
+                  </MenuItem>
+                ))}
+              </Stack>
+            </Box>
           </Menu>
         </Stack>
       </Stack>
